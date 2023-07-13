@@ -1,0 +1,123 @@
+#include<stdio.h>
+struct node{
+int data;
+struct node *next;
+struct node *prev;
+};
+struct node *head=0,*newnode,*tail;
+int create();
+int display();
+int insertatbeg();
+int insertatend();
+int insertinbet();
+
+int main()
+{
+    create();
+    display();
+    insertatbeg();
+    display();
+    insertatend();
+    display();
+    insertinbet();
+    display();
+}
+int insertinbet()
+{
+    struct node *temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    int loc;
+    printf("enter the elemwnt need to be inserted in betwn:\n");
+    scanf("%d",&newnode->data);
+    newnode->next=0;
+    newnode->prev=0;
+    printf("\n enter the element after which the new element has to be inserted:\n");
+    scanf("%d",&loc);
+    while(temp->data!=loc)
+    {
+        temp=temp->next;
+    }
+    newnode->next=temp->next;
+    newnode->prev=temp;
+    temp->next=newnode;
+
+}
+int insertatend()
+{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\nenter the data to inser at end:\n");
+    scanf("%d",&newnode->data);
+    newnode->next=0;
+    newnode->prev=0;
+    if(head==0)
+    {
+        head=tail=newnode;
+    }
+    else{
+        tail->next=newnode;
+        newnode->prev=tail;
+
+        tail=newnode;
+    }
+}
+int insertatbeg()
+{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\nenter the data to insert at beg:\n");
+    scanf("%d",&newnode->data);
+    newnode->next=0;
+    newnode->prev=0;
+    if(head==0)
+    {
+        head=tail=newnode;
+    }
+    else{
+        head->prev=newnode;
+        newnode->next=head;
+        head=newnode;
+    }
+}
+int create()
+{
+    int choice;
+    do{
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter the data:\n");
+    scanf("%d",&newnode->data);
+    newnode->next=0;
+    newnode->prev=0;
+    if(head==0)
+    {
+        head=tail=newnode;
+    }
+    else{
+        tail->next=newnode;
+        newnode->prev=tail;
+       tail=newnode;
+
+        }
+        printf("do u want to continue:");
+        scanf("%d",&choice);
+        }while(choice);
+
+}
+
+int display()
+{
+    if(head==0)
+    {
+        printf("no node to display!:)");
+    }
+    else
+    {
+        struct node *temp;
+        temp=head;
+        while(temp!=0)
+        {
+            printf("%d",temp->data);
+          //  printf("%d",temp);
+            printf("--->");
+            temp=temp->next;
+        }
+    }
+}
